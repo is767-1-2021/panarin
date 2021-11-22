@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class Namemodel extends ChangeNotifier {
+class Loginmodel extends ChangeNotifier {
   String? _name;
   String? number;
   String? _email;

@@ -1,15 +1,17 @@
-import 'dart:math';
 
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:hamtarot_app/HomePage.dart';
+import 'package:hamtarot_app/Login/model.dart';
 import 'package:hamtarot_app/Question/answer_page.dart';
 import 'package:hamtarot_app/Question/question_form_model.dart';
-import 'package:hamtarot_app/controllers/qcard_controller.dart';
-import 'package:hamtarot_app/model/qcard_model.dart';
-import 'package:hamtarot_app/services/qcard_services.dart';
+import 'package:hamtarot_app/Question/qcard_controller.dart';
+import 'package:hamtarot_app/Question/qcard_model.dart';
+import 'package:hamtarot_app/Question/qcard_services.dart';
 import 'package:provider/provider.dart';
 
 class QuestionPage extends StatelessWidget {
@@ -36,16 +38,11 @@ class QuestionPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-                    'https://firebasestorage.googleapis.com/v0/b/is767-2021-hamtarot.appspot.com/o/card%2Fcard_back.png?alt=media&token=d53b8bc4-ebd2-4c0b-8ddd-efca88f051b3',
-                    width: 200,
-                    height: 350,),
-
-            // Image.asset(
-            //   'assets/card_back.png',
-            //   width: 200,
-            //   height: 300,
-            // ),
+            Image.asset(
+              'assets/card_back.png', 
+              width: 200, 
+              height: 300
+            ),
             Text(
               'ให้ไพ่ช่วยทำนายกัน',
               style: TextStyle(fontSize: 25, color: Colors.black54),
@@ -115,7 +112,7 @@ class _QuestionFormState extends State<QuestionForm> {
   Services? service;
   QcardController? controller;
   List<Qcard> qcard = List.empty();
-   int randomIndex = Random().nextInt(21);
+   int randomIndex = Random().nextInt(22);
 
   @override
   void initState() {
@@ -181,7 +178,7 @@ class _QuestionFormState extends State<QuestionForm> {
                 context.read<QuestionFormmodel>().name = _name;
                 context.read<QuestionFormmodel>().question = _question;
 
-              await Future.delayed(const Duration(milliseconds: 1000));
+              await Future.delayed(const Duration(milliseconds: 1500));
 
               await showDialog(
                       context: context,
@@ -192,24 +189,28 @@ class _QuestionFormState extends State<QuestionForm> {
                               Text('คุณได้ไพ่ ${newqcard.title}'),
                           contentPadding: EdgeInsets.all(30),
                           actions: <Widget>[
-                            ElevatedButton(
-                                onPressed: () async {
-                                  await FirebaseFirestore.instance
-                                    .collection('ham_qcardhistory')
-                                    .add({
-                                      'name': _name,
-                                      'question': _question,
-                                      'qcardid': newqcard.id,
-                                      'timestamp': Timestamp.now(),
-                                    });
-                                  await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            AnswerPage( newqcard : newqcard),
-                                      ));
-                                },
-                                child: Center(child: Text('ดูคำทำนาย')))
+                            Consumer<Loginmodel>( builder: (context , form , child) {
+                              return ElevatedButton(
+                                  onPressed: () async {
+                            
+                                    String cardname ='คุณได้ไพ่ ';
+                                    await FirebaseFirestore.instance
+                                      .collection('ham_history')
+                                      .add({
+                                        'email': form.email,
+                                        'result': '$cardname' + '${newqcard.title}',
+                                        'historydate': Timestamp.now(),
+                                      });
+                                    await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              AnswerPage( newqcard : newqcard),
+                                        ));
+                                  },
+                                  child: Center(child: Text('ดูคำทำนาย')));
+                              },
+                            ),
                           ],
                         );
                       },
@@ -220,6 +221,13 @@ class _QuestionFormState extends State<QuestionForm> {
                     };
                 },
                 child: Text('ทำนาย'),
+          ),
+
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/h');
+            }, 
+            child: Text('ประวัติการเปิดไพ่'),
           ),
         ],
       ),

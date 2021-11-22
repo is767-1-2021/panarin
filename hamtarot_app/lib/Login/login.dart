@@ -117,7 +117,7 @@ class _LoginState extends State<Login> {
                           });
                           if ((_formKey.currentState!.validate())) {
                             _formKey.currentState!.save();
-                            context.read<Namemodel>().email = email;
+                            context.read<Loginmodel>().email = email;
                             try {
                               final newUser = await _auth
                                 .signInWithEmailAndPassword(

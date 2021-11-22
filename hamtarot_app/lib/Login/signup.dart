@@ -33,18 +33,21 @@ class _SignupState extends State<Signup> {
           title: Text("Sing up"),
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.only(top: 15.0), 
+          padding: EdgeInsets.only(top: 15.0),
           child: Center(
             child: Column(
               children: <Widget>[
                 Image.asset(
-                  'assets/iconapp.png',
+                  'assets/icon.png',
                   width: 280,
                   height: 320,
                 ),
                 Text(
                   "Sing up to Hamtarot",
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0, color: Colors.brown[600]),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18.0,
+                      color: Colors.brown[600]),
                 ),
                 SizedBox(
                   height: 20.0,
@@ -62,7 +65,9 @@ class _SignupState extends State<Signup> {
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(32.0))),
-                          errorText: _validateemail ? 'Please enter your email.' : null)),
+                          errorText: _validateemail
+                              ? 'Please enter your email.'
+                              : null)),
                 ),
                 SizedBox(
                   height: 20.0,
@@ -78,8 +83,12 @@ class _SignupState extends State<Signup> {
                     decoration: InputDecoration(
                         hintText: "Enter your Password",
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(32.0))),
-                        errorText: _validatepassword ? 'Please enter your password.' : null),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(32.0))),
+                        errorText: _validatepassword
+                            ? 'Please enter your password.'
+                            : null),
+                    obscureText: true,
                   ),
                 ),
                 SizedBox(
@@ -103,7 +112,7 @@ class _SignupState extends State<Signup> {
                           });
                           if ((_formKey.currentState!.validate())) {
                             _formKey.currentState!.save();
-                            context.read<Namemodel>().email = email;
+                            context.read<Loginmodel>().email = email;
 
                             try {
                               final newUser = await _auth

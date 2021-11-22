@@ -1,10 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flip_card/flip_card.dart';
+// import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hamtarot_app/HomePage.dart';
 import 'package:hamtarot_app/Question/question_form_model.dart';
 import 'package:hamtarot_app/Question/question_page.dart';
-import 'package:hamtarot_app/model/qcard_model.dart';
+import 'package:hamtarot_app/Question/qcard_model.dart';
 
 import 'package:provider/provider.dart';
 

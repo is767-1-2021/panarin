@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hamtarot_app/model/qcard_model.dart';
-import 'package:hamtarot_app/services/qcard_services.dart';
+import 'package:hamtarot_app/Question/qcard_model.dart';
+import 'package:hamtarot_app/Question/qcard_services.dart';
 
 class QcardController {
   final Services service;
@@ -20,8 +19,4 @@ class QcardController {
     return qcard;
     
   } 
-
-  // Future<void> addQcard(String name, String question, int qcardid, Timestamp timestamp) async {
-  //   await service.addQcard(name, question, qcardid, timestamp);
-  // }
 }
