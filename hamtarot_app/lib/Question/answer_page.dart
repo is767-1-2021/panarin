@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hamtarot_app/HomePage.dart';
 import 'package:hamtarot_app/Question/question_form_model.dart';
@@ -18,6 +19,7 @@ class AnswerPage extends StatefulWidget {
 class _AnswerPageState extends State<AnswerPage> {
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -61,7 +63,7 @@ class _AnswerPageState extends State<AnswerPage> {
                             widget.newqcard.img,
                             width: 200,
                             height: 350,
-                          ), //แก้เป็นnetwork
+                          ), 
                           Consumer<QuestionFormmodel>(
                             builder: (context, form, child) {
                               return 
@@ -100,12 +102,6 @@ class _AnswerPageState extends State<AnswerPage> {
                 ),
               ],
             ),
-            /*  ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/9');
-              },
-              child: Text('ไหว้พระเสริมบุญ'),
-            ),*/
           ],
         ),
       ),
@@ -152,7 +148,6 @@ class _AnswerPageState extends State<AnswerPage> {
                 icon: Icon(Icons.account_balance_rounded,
                     size: 30, color: Colors.black)),
           ],
-          //  animationDuration: Duration(milliseconds: 200),
           index: 2,
         ),
       ),

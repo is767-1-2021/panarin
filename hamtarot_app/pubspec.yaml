@@ -19,6 +19,8 @@ dependencies:
   flutter_launcher_icons: ^0.9.2
   firebase_core: "^1.7.0"
   cloud_firestore: "^2.5.3"
+  firebase_auth: ^3.2.0
+  firebase_database: ^8.1.0
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +58,7 @@ flutter:
     - assets/temp1.jpg
     - assets/temp2.jpg
     - assets/icon.png
+    - assets/iconapp.png
     - assets/card_back.png
     - assets/card_front1.png
     - assets/card_front2.png

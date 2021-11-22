@@ -3,6 +3,9 @@ import 'package:hamtarot_app/model/qcard_model.dart';
 
 abstract class Services {
   Future<List<Qcard>> getQcard();
+
+  // Future<void> addQcard(String _name, String _question, int newqcard.id, Timestamp timestamp);
+
 }
 
 class QcardServices extends Services {
@@ -18,4 +21,16 @@ class QcardServices extends Services {
     return qcard.qcard;
   }
 
+  // @override
+  // Future<void> addQcard(String _name, String _question, int newqcard, Timestamp timestamp) async {
+  //   CollectionReference addQcard =
+  //       FirebaseFirestore.instance.collection('ham_qcardhistory');
+  //         addQcard.add({
+  //         'name': _name,
+  //         'question': _question,
+  //         'qcardid': newqcard,
+  //         'timestamp': timestamp,
+  //         });
+  //   return;
+  // }
 }

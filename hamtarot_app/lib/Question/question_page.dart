@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -35,11 +36,16 @@ class QuestionPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/card_back.png',
-              width: 200,
-              height: 300,
-            ),
+            Image.network(
+                    'https://firebasestorage.googleapis.com/v0/b/is767-2021-hamtarot.appspot.com/o/card%2Fcard_back.png?alt=media&token=d53b8bc4-ebd2-4c0b-8ddd-efca88f051b3',
+                    width: 200,
+                    height: 350,),
+
+            // Image.asset(
+            //   'assets/card_back.png',
+            //   width: 200,
+            //   height: 300,
+            // ),
             Text(
               'ให้ไพ่ช่วยทำนายกัน',
               style: TextStyle(fontSize: 25, color: Colors.black54),
@@ -90,7 +96,6 @@ class QuestionPage extends StatelessWidget {
                 icon: Icon(Icons.account_balance_rounded,
                     size: 30, color: Colors.black)),
           ],
-          // animationDuration: Duration(milliseconds: 200),
           index: 2,
         ),
       ),
@@ -111,8 +116,6 @@ class _QuestionFormState extends State<QuestionForm> {
   QcardController? controller;
   List<Qcard> qcard = List.empty();
    int randomIndex = Random().nextInt(21);
-
-  get newqcard => null;
 
   @override
   void initState() {
@@ -145,7 +148,7 @@ class _QuestionFormState extends State<QuestionForm> {
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'บอกชื่อกันหน่อย';
+                return 'กรุณาใส่ชื่อของคุณ';
               }
               return null;
             },
@@ -170,28 +173,36 @@ class _QuestionFormState extends State<QuestionForm> {
             },
           ),
 
-            ElevatedButton(
-                onPressed: () async { getQcard();
-                 if (_formKey.currentState!.validate()) {
+          ElevatedButton(
+            onPressed: () async { getQcard();
+              if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
 
                 context.read<QuestionFormmodel>().name = _name;
                 context.read<QuestionFormmodel>().question = _question;
 
-                    await showDialog(
+              await Future.delayed(const Duration(milliseconds: 1000));
+
+              await showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         Qcard newqcard = qcard[randomIndex];
                         return AlertDialog(
                           content:
-                              Text('คุณได้ไพ่ใบที่${newqcard.id}'),
+                              Text('คุณได้ไพ่ ${newqcard.title}'),
                           contentPadding: EdgeInsets.all(30),
                           actions: <Widget>[
                             ElevatedButton(
-                                onPressed: ()  
-                                
-                                {
-                                  Navigator.push(
+                                onPressed: () async {
+                                  await FirebaseFirestore.instance
+                                    .collection('ham_qcardhistory')
+                                    .add({
+                                      'name': _name,
+                                      'question': _question,
+                                      'qcardid': newqcard.id,
+                                      'timestamp': Timestamp.now(),
+                                    });
+                                  await Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
@@ -203,7 +214,6 @@ class _QuestionFormState extends State<QuestionForm> {
                         );
                       },
                     );
-
                   } else
                     () {
                       setState(() {});
