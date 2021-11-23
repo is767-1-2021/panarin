@@ -64,23 +64,35 @@ class _History_pageState extends State<History_page> {
         itemCount: history.isEmpty ? 1 : history.length,
         itemBuilder: (context, index) {
           if (history.isEmpty) {
-            return Text("ไม่พบข้อมูล");
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("ไม่พบข้อมูล"),
+              ],
+            );
           }
 
           return Row(
             children: [
-              Row(
-                children: [Icon(Icons.date_range_rounded)],
+              Container(
+                padding: EdgeInsets.only(right: 5, left: 10),
+                child: Row(
+                  children: [Icon(Icons.feed_rounded)],
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  //Icon(Icons.ac_unit),
-                  Text("ผลคำทำนาย : " +history[index].result),
-                  Text("วันที่ : " +
-                      getTime(history[index].historydate).toString()),
-                  
-                ],
+              
+              Expanded(
+                child: 
+                  Container(
+                  padding: EdgeInsets.only(right: 5, left: 5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                      Text('ผลคำทำนาย : ' + history[index].result),
+                      Text('วันที่ : ' + getTime(history[index].historydate).toString()),
+                    ],
+                  ),
+                ),
               ),
             ],
           );

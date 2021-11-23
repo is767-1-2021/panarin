@@ -177,7 +177,7 @@ class _QuestionFormState extends State<QuestionForm> {
 
                 context.read<QuestionFormmodel>().name = _name;
                 context.read<QuestionFormmodel>().question = _question;
-
+              
               await Future.delayed(const Duration(milliseconds: 1500));
 
               await showDialog(
@@ -194,11 +194,13 @@ class _QuestionFormState extends State<QuestionForm> {
                                   onPressed: () async {
                             
                                     String cardname ='คุณได้ไพ่ ';
+                                    String sentence = ' เป็นคำตอบ';
+                                    
                                     await FirebaseFirestore.instance
                                       .collection('ham_history')
                                       .add({
                                         'email': form.email,
-                                        'result': '$cardname' + '${newqcard.title}',
+                                        'result': '$cardname' + '${newqcard.title}' + '$sentence',
                                         'historydate': Timestamp.now(),
                                       });
                                     await Navigator.push(
@@ -223,12 +225,12 @@ class _QuestionFormState extends State<QuestionForm> {
                 child: Text('ทำนาย'),
           ),
 
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/h');
-            }, 
-            child: Text('ประวัติการเปิดไพ่'),
-          ),
+          // ElevatedButton(
+          //   onPressed: () {
+          //     Navigator.pushNamed(context, '/h');
+          //   }, 
+          //   child: Text('ประวัติการเปิดไพ่'),
+          // ),
         ],
       ),
     );

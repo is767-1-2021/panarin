@@ -70,6 +70,7 @@ class MyAppHamtarot extends StatelessWidget {
           '/6': (context) => ShakePage(), //siamese
           '/9': (context) => ThingView(), //temple
           '/13': (context) => Signup(),
+          '/h': (context) => History_page(),
         });
   }
 }
