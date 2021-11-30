@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "146466802907",
+    "project_id": "is767-2021-panarin",
+    "storage_bucket": "is767-2021-panarin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146466802907:android:7c21d57143882e137990fe",
+        "android_client_info": {
+          "package_name": "com.example.final_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146466802907-m2rhmf1r2re12dp97skh18kf1ns7jnl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdNOzWIffRMVfqGQF7YNH3gMi33c80dMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146466802907-m2rhmf1r2re12dp97skh18kf1ns7jnl7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
